@@ -6,12 +6,13 @@ import styles from '../../assets/css/sass/search-user/search-button.module.scss'
 function SearchButton({ isLoading, onClick }) {
   return (
     <Button
-      onClick={onClick}
       className={styles.searchButton}
+      onClick={onClick}
+      loading={isLoading}
       intent="success"
       text="Buscar"
       large
-      loading={isLoading}
+      fill
     />
   );
 }
