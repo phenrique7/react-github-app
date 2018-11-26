@@ -8,6 +8,7 @@ import { Welcome } from '@storybook/react/demo';
 import SearchButton from '../components/search-user/SearchButton';
 import Avatar from '../components/Avatar';
 import GithubAvatar from '../assets/images/github-mark.png';
+import SearchForm from '../components/search-user/SearchForm';
 
 import '../assets/css/sass/index.global.scss';
 import '../../node_modules/normalize.css/normalize.css';
@@ -46,3 +47,6 @@ storiesOf('Avatar', module)
       shadow={2}
     />
   ));
+
+storiesOf('Search Form', module)
+  .add('standard', () => <SearchForm />);

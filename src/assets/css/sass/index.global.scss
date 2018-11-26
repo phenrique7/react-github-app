@@ -1,5 +1,18 @@
 @import "reset";
+@import url('https://rsms.me/inter/inter-ui.css');
 
 * {
   box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter UI', sans-serif;
+}
+
+img {
+  display: block;
 }
