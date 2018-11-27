@@ -1,5 +1,5 @@
 import React from 'react';
-import { Classes } from '@blueprintjs/core';
+import { Classes, Intent, Toast } from '@blueprintjs/core';
 import cn from 'classnames';
 import Avatar from '../Avatar';
 import SearchButton from './SearchButton';
@@ -12,7 +12,17 @@ class SearchForm extends React.Component {
 
     this.state = {
       value: '',
+      isValidInput: true,
     };
+
+    this.handleDismissToast = this.handleDismissToast.bind(this);
+  }
+
+  handleDismissToast() {
+    this.setState({ toastFade: 'out' });
+    setTimeout(() => {
+      this.setState({ isValidInput: true });
+    }, 500);
   }
 
   handleChange(ev) {
@@ -25,18 +35,34 @@ class SearchForm extends React.Component {
     const { value } = this.state;
 
     if (value.trim() === '') {
-      console.log('vazio');
-    } else {
-      console.log(value);
+      this.setState({
+        isValidInput: false,
+        toastFade: 'in',
+      });
     }
   }
 
   render() {
-    const { value } = this.state;
+    const { value, isValidInput, toastFade } = this.state;
 
     return (
       <div className={styles.formContainer}>
-        <form className={styles.form} onSubmit={this.submitForm.bind(this)}>
+        {!isValidInput && (
+          <div className={styles.toastContainer}>
+            <Toast
+              intent={Intent.DANGER}
+              icon="warning-sign"
+              message="Username can't be empty."
+              className={toastFade === 'in' ? styles.fadeIn : styles.fadeOut}
+              timeout={4000}
+              onDismiss={this.handleDismissToast}
+            />
+          </div>)
+        }
+        <form
+          className={styles.form}
+          onSubmit={this.submitForm.bind(this)}
+        >
           <Avatar
             src={GithubAvatar}
             alt="Github avatar"

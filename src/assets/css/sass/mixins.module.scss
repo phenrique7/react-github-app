@@ -10,3 +10,19 @@
     }
   }
 }
+
+@mixin fade-keyframes($from, $to) {
+  from {
+    opacity: $from;
+  }
+  to {
+    opacity: $to;
+  }
+}
+
+@mixin fade-animation($animationName) {
+  -webkit-animation-name: $animationName;
+  animation-name: $animationName;
+  animation-fill-mode: both;
+  animation-duration: .5s;
+}

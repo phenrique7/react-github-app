@@ -2,7 +2,6 @@
 
 .formContainer {
   height: 100%;
-  background: #2b3137;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,5 +33,34 @@
   width: 100%;
   margin-bottom: 25px;
   margin-top: 80px;
-  height: 35px;
+  height: 35px !important;
+}
+
+.toastContainer {
+  position: absolute;
+  top: 0;
+}
+
+@-webkit-keyframes fadeIn {
+  @include fade-keyframes(0, 1);
+}
+
+@keyframes fadeIn {
+  @include fade-keyframes(0, 1);
+}
+
+@-webkit-keyframes fadeOut {
+  @include fade-keyframes(1, 0);
+}
+
+@keyframes fadeOut {
+  @include fade-keyframes(1, 0);
+}
+
+.fadeIn {
+  @include fade-animation(fadeIn);
+}
+
+.fadeOut {
+  @include fade-animation(fadeOut);
 }

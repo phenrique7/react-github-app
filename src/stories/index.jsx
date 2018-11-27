@@ -14,7 +14,6 @@ import SearchButton from '../components/search-user/SearchButton';
 import Avatar from '../components/Avatar';
 import GithubAvatar from '../assets/images/github-mark.png';
 import SearchForm from '../components/search-user/SearchForm';
-import Toaster from '../components/Toaster';
 
 storiesOf('Welcome', module)
   .add('to Storybook', () => <Welcome showApp={linkTo('SearchButton')} />);
@@ -41,16 +40,3 @@ storiesOf('Avatar', module)
 
 storiesOf('Search Form', module)
   .add('standard', () => <SearchForm />);
-
-storiesOf('Toast', module)
-  .add('toast danger', () => (
-    <div>
-      <button
-        type="button"
-        onClick={() => { window.location.reload(); }}
-      >
-        Reload me!
-      </button>
-      <Toaster isActive />
-    </div>
-  ));
