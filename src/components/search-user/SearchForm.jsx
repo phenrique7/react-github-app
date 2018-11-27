@@ -2,15 +2,41 @@ import React from 'react';
 import { Classes } from '@blueprintjs/core';
 import cn from 'classnames';
 import Avatar from '../Avatar';
+import SearchButton from './SearchButton';
 import GithubAvatar from '../../assets/images/github-mark.png';
 import styles from '../../assets/css/sass/search-user/search-form.module.scss';
-import SearchButton from './SearchButton';
 
 class SearchForm extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: '',
+    };
+  }
+
+  handleChange(ev) {
+    this.setState({ value: ev.target.value });
+  }
+
+  submitForm(ev) {
+    ev.preventDefault();
+
+    const { value } = this.state;
+
+    if (value.trim() === '') {
+      console.log('vazio');
+    } else {
+      console.log(value);
+    }
+  }
+
   render() {
+    const { value } = this.state;
+
     return (
       <div className={styles.formContainer}>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={this.submitForm.bind(this)}>
           <Avatar
             src={GithubAvatar}
             alt="Github avatar"
@@ -23,11 +49,10 @@ class SearchForm extends React.Component {
             className={cn(Classes.INPUT, styles.formInput)}
             dir="auto"
             placeholder="Enter a github username"
+            onChange={this.handleChange.bind(this)}
+            value={value}
           />
-          <SearchButton
-            isLoading={false}
-            onClick={() => {}}
-          />
+          <SearchButton isLoading={false} />
         </form>
       </div>
     );

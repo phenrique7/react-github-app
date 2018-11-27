@@ -4,29 +4,20 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 
-import { Welcome } from '@storybook/react/demo';
-import SearchButton from '../components/search-user/SearchButton';
-import Avatar from '../components/Avatar';
-import GithubAvatar from '../assets/images/github-mark.png';
-import SearchForm from '../components/search-user/SearchForm';
-
 import '../assets/css/sass/index.global.scss';
 import '../../node_modules/normalize.css/normalize.css';
 import '../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css';
 import '../../node_modules/@blueprintjs/core/lib/css/blueprint.css';
 
+import { Welcome } from '@storybook/react/demo';
+import SearchButton from '../components/search-user/SearchButton';
+import Avatar from '../components/Avatar';
+import GithubAvatar from '../assets/images/github-mark.png';
+import SearchForm from '../components/search-user/SearchForm';
+import Toaster from '../components/Toaster';
+
 storiesOf('Welcome', module)
   .add('to Storybook', () => <Welcome showApp={linkTo('SearchButton')} />);
-
-// storiesOf('Button', module)
-//   .add('with text', () => <Button onClick={action('clicked')}>Hello, Button</Button>)
-//   .add('with some emoji', () => (
-//     <Button onClick={action('clicked')}>
-//       <span role="img" aria-label="so cool">
-//         😀 😎 👍 💯
-//       </span>
-//     </Button>
-//   ));
 
 storiesOf('Search Button', module)
   .add('normal', () => <SearchButton isLoading={false} onClick={action('clicked')} />)
@@ -50,3 +41,16 @@ storiesOf('Avatar', module)
 
 storiesOf('Search Form', module)
   .add('standard', () => <SearchForm />);
+
+storiesOf('Toast', module)
+  .add('toast danger', () => (
+    <div>
+      <button
+        type="button"
+        onClick={() => { window.location.reload(); }}
+      >
+        Reload me!
+      </button>
+      <Toaster isActive />
+    </div>
+  ));
