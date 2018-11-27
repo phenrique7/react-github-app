@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 import styles from '../assets/css/sass/avatar.module.scss';
 
 function Avatar({ src, alt }) {
@@ -7,7 +8,7 @@ function Avatar({ src, alt }) {
     <img
       src={src}
       alt={alt}
-      className={alt === 'Github avatar' ? styles.githubAvatar : styles.profileAvatar}
+      className={alt === 'Github avatar' ? cn(styles.githubAvatar, styles.rotating) : styles.profileAvatar}
     />
   );
 }
