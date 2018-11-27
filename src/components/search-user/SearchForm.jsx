@@ -1,5 +1,6 @@
 import React from 'react';
 import { Classes, Intent, Toast } from '@blueprintjs/core';
+import { navigate } from '@reach/router';
 import cn from 'classnames';
 import Avatar from '../Avatar';
 import SearchButton from './SearchButton';
@@ -57,17 +58,16 @@ class SearchForm extends React.Component {
       user
         .getUserData()
         .then((res) => {
-          console.log('first promise', res);
-          window.localStorage.setItem('github-username', username);
-          return user.getRepositories();
-        })
-        .then((res) => {
-          console.log('second promise', res);
-          this.setState(state => ({ loading: !state.loading }));
+          console.log(res);
+          navigate('/profile');
+          // window.localStorage.setItem('github-username', username);
         })
         .catch(() => {
           this.handleShowToast('Username not found');
-          this.setState(state => ({ loading: !state.loading }));
+          this.setState(state => ({
+            value: '',
+            loading: !state.loading,
+          }));
         });
     }
   }
