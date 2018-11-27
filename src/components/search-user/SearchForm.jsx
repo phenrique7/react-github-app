@@ -3,7 +3,7 @@ import { Classes, Intent, Toast } from '@blueprintjs/core';
 import cn from 'classnames';
 import Avatar from '../Avatar';
 import SearchButton from './SearchButton';
-import GithubUser from '../../services/github-user';
+import GitHubUser from '../../services/github-user';
 import GithubAvatar from '../../assets/images/github-mark.png';
 import styles from '../../assets/css/sass/search-user/search-form.module.scss';
 
@@ -45,23 +45,28 @@ class SearchForm extends React.Component {
   submitForm(ev) {
     ev.preventDefault();
 
-    const { value } = this.state;
+    const { value: username } = this.state;
 
-    if (value.trim() === '') {
+    if (username.trim() === '') {
       this.handleShowToast("Username can't be empty");
     } else {
       this.setState(state => ({ loading: !state.loading }));
 
-      const githubUser = new GithubUser(value);
+      const user = new GitHubUser(username);
 
-      githubUser
+      user
         .getUserData()
         .then((res) => {
-          console.log(res);
+          console.log('first promise', res);
+          window.localStorage.setItem('github-username', username);
+          return user.getRepositories();
+        })
+        .then((res) => {
+          console.log('second promise', res);
           this.setState(state => ({ loading: !state.loading }));
         })
         .catch(() => {
-          this.handleShowToast('Invalid username');
+          this.handleShowToast('Username not found');
           this.setState(state => ({ loading: !state.loading }));
         });
     }
@@ -98,7 +103,7 @@ class SearchForm extends React.Component {
             alt="Github avatar"
           />
           <h2 className={styles.formTitle}>
-            React Github App
+            React GitHub App
           </h2>
           <input
             type="text"

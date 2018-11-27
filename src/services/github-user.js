@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-class GithubUser {
+class GitHubUser {
   constructor(username) {
     this.username = username;
   }
@@ -14,4 +14,4 @@ class GithubUser {
   }
 }
 
-export default GithubUser;
+export default GitHubUser;
