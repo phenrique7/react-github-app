@@ -1,0 +1,33 @@
+@import "mixins.module";
+
+@mixin avatar($size, $shadow) {
+  width: $size + px;
+  height: $size + px;
+  border-radius: 50%;
+  box-shadow: $shadow;
+}
+
+$shadow: rgba(0, 0, 0, 0.16) 0 3px 10px, rgba(0, 0, 0, 0.23) 0 3px 10px;
+
+.githubAvatar {
+  margin: 0 auto;
+  @include avatar(80, $shadow);
+}
+
+$shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+.profileAvatar {
+  @include avatar(124, $shadow);
+}
+
+@keyframes rotating {
+  @include rotate-keyframes;
+}
+
+@-webkit-keyframes rotating {
+  @include rotate-keyframes;
+}
+
+.rotating {
+  animation: rotating 10s linear infinite;
+}
