@@ -1,19 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function GitHubProfile(props) {
+function GitHubProfile({ username, unsubscribeUser }) {
   return (
     <div>
       <p>
-        {`${props.username}'s profile page`}
+        {`${username}'s profile page`}
       </p>
       <button
         type="button"
-        onClick={props.unsubscribeUser}
+        onClick={() => {
+          window.localStorage.removeItem('github-username');
+          unsubscribeUser();
+        }}
       >
         Try another
       </button>
     </div>
   );
 }
+
+GitHubProfile.propTypes = {
+  username: PropTypes.string.isRequired,
+  unsubscribeUser: PropTypes.func.isRequired,
+};
 
 export default GitHubProfile;

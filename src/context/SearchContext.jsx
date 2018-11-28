@@ -8,7 +8,7 @@ class SearchProvider extends React.Component {
     super(props);
 
     this.state = {
-      username: '',
+      username: window.localStorage.getItem('github-username'),
     };
 
     this.subscribeUser = this.subscribeUser.bind(this);

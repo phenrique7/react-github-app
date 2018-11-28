@@ -60,6 +60,7 @@ class SearchForm extends React.Component {
         .getUserData()
         .then((res) => {
           console.log(res);
+          window.localStorage.setItem('github-username', username);
           subscribeUser(username);
         })
         .catch(() => {
