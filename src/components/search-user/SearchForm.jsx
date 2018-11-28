@@ -1,7 +1,7 @@
 import React from 'react';
 import { Classes, Intent, Toast } from '@blueprintjs/core';
-import { navigate } from '@reach/router';
 import cn from 'classnames';
+import PropTypes from 'prop-types';
 import Avatar from '../Avatar';
 import SearchButton from './SearchButton';
 import GitHubUser from '../../services/github-user';
@@ -47,6 +47,7 @@ class SearchForm extends React.Component {
     ev.preventDefault();
 
     const { value: username } = this.state;
+    const { subscribeUser } = this.props;
 
     if (username.trim() === '') {
       this.handleShowToast("Username can't be empty");
@@ -59,8 +60,7 @@ class SearchForm extends React.Component {
         .getUserData()
         .then((res) => {
           console.log(res);
-          navigate('/profile');
-          // window.localStorage.setItem('github-username', username);
+          subscribeUser(username);
         })
         .catch(() => {
           this.handleShowToast('Username not found');
@@ -119,5 +119,9 @@ class SearchForm extends React.Component {
     );
   }
 }
+
+SearchForm.propTypes = {
+  subscribeUser: PropTypes.func.isRequired,
+};
 
 export default SearchForm;
