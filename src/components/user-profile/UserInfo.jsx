@@ -13,7 +13,18 @@ function NumberInfo({ info, subinfo }) {
   );
 }
 
-function UserInfo() {
+function UserInfo(props) {
+  const {
+    name,
+    username,
+    avatar,
+    bio,
+    followers,
+    repositories,
+    following,
+    githubHref,
+  } = props;
+
   return (
     <div className={styles.card}>
       <div className={styles.cardHeader}>
@@ -25,28 +36,25 @@ function UserInfo() {
         />
       </div>
       <Avatar
-        src="https://demos.creative-tim.com/paper-dashboard-pro-react/static/media/mike.aab414f7.jpg"
+        src={avatar}
         alt="Profile avatar"
       />
       <div className={styles.cardBody}>
-        <h3>Kent C. Dodds</h3>
-        <h4>kentcdodds</h4>
-        <p>
-          Aqui vai ficar a bio do usuário I like the way you work it No diggity
-        </p>
+        <h3>{name}</h3>
+        <h4>{username}</h4>
+        <p>{bio}</p>
       </div>
       <div className={styles.cardFooter}>
         <div className={styles.numberInfoContainer}>
-          <NumberInfo info={7209} subinfo="followers" />
-          <NumberInfo info={253} subinfo="repositories" />
-          <NumberInfo info={39} subinfo="following" />
+          <NumberInfo info={followers} subinfo="followers" />
+          <NumberInfo info={repositories} subinfo="repositories" />
+          <NumberInfo info={following} subinfo="following" />
         </div>
         <div className={styles.organizations}>
           <strong>Organizations</strong>
         </div>
         <AnchorButton
-          className={styles.anchorButton}
-          href="https://github.com/kentcdodds"
+          href={githubHref}
           intent="success"
           text="View on GitHub"
           fill
@@ -64,6 +72,17 @@ function UserInfo() {
 NumberInfo.propTypes = {
   info: PropTypes.number.isRequired,
   subinfo: PropTypes.string.isRequired,
+};
+
+UserInfo.propTypes = {
+  name: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
+  bio: PropTypes.string.isRequired,
+  followers: PropTypes.number.isRequired,
+  repositories: PropTypes.number.isRequired,
+  following: PropTypes.number.isRequired,
+  githubHref: PropTypes.string.isRequired,
 };
 
 export default UserInfo;
