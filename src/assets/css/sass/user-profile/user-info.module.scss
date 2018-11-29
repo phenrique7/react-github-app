@@ -1,0 +1,88 @@
+@import '../mixins.module';
+
+.card {
+  position: relative;
+  width: 100%;
+  min-height: 516px;
+  border-radius: $border-radius;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 1px rgba(16, 22, 26, 0.15),
+  0 0 0 rgba(16, 22, 26, 0),
+  0 0 0 rgba(16, 22, 26, 0);
+}
+
+.cardHeader {
+  height: 130px;
+  max-width: 100%;
+  @include borderTopRadius;
+  img {
+    @include borderTopRadius;
+  }
+}
+
+.cardBody {
+  padding: 15px 15px 10px;
+  min-height: 230px;
+  text-align: center;
+  h3 {
+    margin-top: 65px;
+    font-size: 2em;
+    line-height: 30px;
+  }
+  h4 {
+    font-size: 1.5em;
+    line-height: 25px;
+    margin-bottom: 1rem;
+    color: $subtitle-color;
+  }
+  p {
+    font-size: 1em;
+    margin-bottom: 1rem;
+  }
+  &:after {
+    content: '';
+    display: block;
+    width: 80%;
+    height: 1px;
+    background: rgba(0, 0, 0, .1);
+    margin: 30px auto 0 auto;
+  }
+}
+
+.cardFooter {
+  padding: 10px 15px 15px 15px;
+  h3 {
+    font-size: 2em;
+    line-height: 30px;
+  }
+  small {
+    color: $subtitle-color;
+  }
+}
+
+.numberInfoContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.numberInfo {
+  flex: 1 1 70px;
+  text-align: center;
+}
+
+.organizations {
+  text-align: center;
+  padding: 10px;
+  &:before {
+    content: '';
+    display: block;
+    width: 80%;
+    height: 1px;
+    background: rgba(0, 0, 0, .1);
+    margin: 20px auto;
+  }
+}
+
+a ~ button {
+  margin-top: 10px;
+}

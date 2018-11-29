@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from '../../assets/css/sass/user-profile/github-profile.module.scss';
 
 function GitHubProfile({ username, unsubscribeUser }) {
   return (
-    <div>
+    <div className={styles.mainPanel}>
       <p>
         {`${username}'s profile page`}
       </p>

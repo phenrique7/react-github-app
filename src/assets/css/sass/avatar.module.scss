@@ -1,23 +1,23 @@
 @import "mixins.module";
 
-@mixin avatar($size, $shadow) {
+@mixin avatar($size) {
   width: $size + px;
   height: $size + px;
   border-radius: 50%;
-  box-shadow: $shadow;
+  box-shadow: rgba(0, 0, 0, 0.16) 0 3px 10px, rgba(0, 0, 0, 0.23) 0 3px 10px;
+  margin: 0 auto;
 }
-
-$shadow: rgba(0, 0, 0, 0.16) 0 3px 10px, rgba(0, 0, 0, 0.23) 0 3px 10px;
 
 .githubAvatar {
-  margin: 0 auto;
-  @include avatar(80, $shadow);
+  @include avatar(80);
 }
 
-$shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
 .profileAvatar {
-  @include avatar(124, $shadow);
+  position: absolute;
+  top: 68px;
+  right: 0;
+  left: 0;
+  @include avatar(124);
 }
 
 @keyframes rotating {

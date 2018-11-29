@@ -1,3 +1,4 @@
+@import 'variables.module';
 
 @mixin device ($device) {
   @if ($device == tablet) {
@@ -34,4 +35,9 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+@mixin borderTopRadius {
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
 }

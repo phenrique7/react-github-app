@@ -14,6 +14,7 @@ import SearchButton from '../components/search-user/SearchButton';
 import Avatar from '../components/Avatar';
 import GithubAvatar from '../assets/images/github-mark.png';
 import SearchForm from '../components/search-user/SearchForm';
+import UserInfo from '../components/user-profile/UserInfo';
 
 storiesOf('Welcome', module)
   .add('to Storybook', () => <Welcome showApp={linkTo('SearchButton')} />);
@@ -27,7 +28,6 @@ storiesOf('Avatar', module)
     <Avatar
       src={GithubAvatar}
       alt="Github avatar"
-      shadow={1}
     />
   ))
   .add('profile avatar', () => (
@@ -39,4 +39,19 @@ storiesOf('Avatar', module)
   ));
 
 storiesOf('Search Form', module)
-  .add('standard', () => <SearchForm />);
+  .add('standard', () => <SearchForm subscribeUser={() => {}} />);
+
+storiesOf('Profile info', module)
+  .add('card', () => (
+    <div
+      style={{
+        backgroundColor: '#f4f3ef',
+        height: '100%',
+        paddingLeft: '20px',
+      }}
+    >
+      <div style={{ width: '33.333333%' }}>
+        <UserInfo />
+      </div>
+    </div>
+  ));
