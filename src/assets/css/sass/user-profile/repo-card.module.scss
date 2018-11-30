@@ -1,9 +1,9 @@
 @import '../mixins.module';
 
 .repoCard {
-  padding: 10px 20px 20px 20px;
+  padding: 10px 20px 15px 20px;
   width: 359px;
-  height: 135px;
+  min-height: 135px;
   @include card;
   h5 {
     a {
@@ -16,12 +16,12 @@
     font-size: 1em;
     line-height: 20px;
     color: $gray-color;
+    min-height: 52px;
   }
 }
 
 .repoStats {
   display: flex;
-  padding-top: 5px;
   color: $gray-color;
   span {
     flex: 0 1 85px;

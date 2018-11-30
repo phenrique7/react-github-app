@@ -46,6 +46,8 @@ function RepoCard(props) {
 
 RepoCard.defaultProps = {
   repoDescription: '',
+  repoStars: 0,
+  repoForks: 0,
 };
 
 RepoCard.propTypes = {
