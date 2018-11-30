@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, AnchorButton } from '@blueprintjs/core';
-import styles from '../../assets/css/sass/user-profile/user-info.module.scss';
 import Avatar from '../Avatar';
+import styles from '../../assets/css/sass/user-profile/user-info.module.scss';
 
 function NumberInfo({ info, subinfo }) {
   return (
@@ -28,17 +28,11 @@ function UserInfo(props) {
   return (
     <div className={styles.card}>
       <div className={styles.cardHeader}>
-        <img
-          height={130}
-          width="100%"
-          src="https://demos.creative-tim.com/paper-dashboard-pro-react/static/media/damir-bosnjak.a6f24e7d.jpg"
-          alt="Profile"
+        <Avatar
+          src={avatar}
+          alt="Profile avatar"
         />
       </div>
-      <Avatar
-        src={avatar}
-        alt="Profile avatar"
-      />
       <div className={styles.cardBody}>
         <h3>{name}</h3>
         <h4>{username}</h4>

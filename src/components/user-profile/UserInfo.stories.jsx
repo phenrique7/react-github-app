@@ -10,9 +10,10 @@ storiesOf('Profile info', module)
     <div
       style={{
         backgroundColor: '#f4f3ef',
-        height: '100%',
+        height: 'auto',
         paddingLeft: '20px',
         paddingTop: '20px',
+        paddingBottom: '20px',
       }}
     >
       <div style={{ width: '33.333333%' }}>
