@@ -4,9 +4,10 @@ import axios from 'axios';
 import { compose, withHandlers, withState } from 'recompose';
 import UserInfo from './UserInfo';
 import UserOrganizations from './UserOrganizations';
+import RepoCard from './RepoCard';
 
 storiesOf('Profile info', module)
-  .add('general', () => (
+  .add('user info', () => (
     <div
       style={{
         backgroundColor: '#f4f3ef',
@@ -88,4 +89,16 @@ storiesOf('Profile info', module)
         <StorieComponent />
       </div>
     );
-  });
+  })
+  .add('repo card', () => (
+    <div style={{ padding: '10px' }}>
+      <RepoCard
+        repoName="react-testing-library"
+        repoUrl="https://github.com/kentcdodds/react-testing-library"
+        repoDescription="Simple and complete React DOM testing utilities that encourage good testing practices."
+        repoLanguage="JavaScript"
+        repoStars={4.1}
+        repoForks={239}
+      />
+    </div>
+  ));
