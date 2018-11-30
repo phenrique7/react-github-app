@@ -1,6 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import axios from 'axios';
+import { compose, withHandlers, withState } from 'recompose';
 import UserInfo from './UserInfo';
+import UserOrganizations from './UserOrganizations';
 
 storiesOf('Profile info', module)
   .add('general', () => (
@@ -27,17 +30,61 @@ storiesOf('Profile info', module)
     </div>
   ))
   .add('organizations', () => {
-    // axios.get('https://api.github.com/users/kentcdodds/orgs')
+    function Organizations(props) {
+      const {
+        organizations,
+        getOrganizations,
+        clearOrganizations,
+      } = props;
 
-    const organizations = () => {
-      console.log('ok');
-    };
+      return (
+        <div>
+          <button
+            type="button"
+            onClick={getOrganizations}
+          >
+            Get user organizations
+          </button>
+          <button
+            type="button"
+            onClick={clearOrganizations}
+          >
+            Clear organizations
+          </button>
+          <UserOrganizations orgs={organizations} />
+        </div>
+      );
+    }
+
+    const StorieComponent = compose(
+      withState('organizations', 'setOrganizations', []),
+      withHandlers({
+        getOrganizations: props => async () => {
+          try {
+            const response = await axios.get('https://api.github.com/users/kentcdodds/orgs');
+            console.log('data', response.data);
+
+            const orgs = response.data.map(org => ({
+              avatar: org.avatar_url,
+              name: org.login,
+              githubUrl: `https://github.com/${org.login}`,
+            }));
+
+            props.setOrganizations(orgs);
+          } catch (err) {
+            console.log(err);
+            props.setOrganizations([]);
+          }
+        },
+        clearOrganizations: props => () => {
+          props.setOrganizations([]);
+        },
+      }),
+    )(Organizations);
 
     return (
-      <div>
-        <button type="button" onClick={organizations}>
-          Get organizations
-        </button>
+      <div style={{ width: '33.333333%' }}>
+        <StorieComponent />
       </div>
     );
   });
