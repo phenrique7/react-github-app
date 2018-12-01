@@ -27,6 +27,8 @@ storiesOf('Profile info', module)
           repositories={253}
           following={39}
           githubHref="https://github.com/kentcdodds"
+          organizations={[]}
+          unsubscribeUser={() => {}}
         />
       </div>
     </div>
@@ -67,8 +69,8 @@ storiesOf('Profile info', module)
             console.log('data', response.data);
 
             const orgs = response.data.map(org => ({
-              avatar: org.avatar_url,
-              name: org.login,
+              avatar_url: org.avatar_url,
+              login: org.login,
               githubUrl: `https://github.com/${org.login}`,
             }));
 

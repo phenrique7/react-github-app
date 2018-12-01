@@ -10,13 +10,13 @@ function UserOrganizations({ orgs }) {
       href={org.githubUrl}
       target="_blank"
       rel="noopener noreferrer"
-      title={org.name}
+      title={org.login}
     >
       <img
-        src={org.avatar}
+        src={org.avatar_url}
         alt={`@${org.name}`}
-        width={45}
-        height={45}
+        width={48}
+        height={48}
       />
     </a>
   ));

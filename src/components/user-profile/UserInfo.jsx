@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 import { Button, AnchorButton } from '@blueprintjs/core';
 import Avatar from '../Avatar';
+import UserOrganizations from './UserOrganizations';
 import styles from '../../assets/css/sass/user-profile/user-info.module.scss';
 
 function NumberInfo({ info, subinfo }) {
@@ -20,9 +22,11 @@ function UserInfo(props) {
     avatar,
     bio,
     followers,
-    repositories,
     following,
+    repositories,
+    organizations,
     githubHref,
+    unsubscribeUser,
   } = props;
 
   return (
@@ -44,8 +48,13 @@ function UserInfo(props) {
           <NumberInfo info={repositories} subinfo="repositories" />
           <NumberInfo info={following} subinfo="following" />
         </div>
-        <div className={styles.organizations}>
-          <strong>Organizations</strong>
+        <div
+          className={organizations.length === 0
+            ? styles.organizations
+            : cn(styles.organizations, styles.orgsDivider)
+          }
+        >
+          <UserOrganizations orgs={organizations} />
         </div>
         <AnchorButton
           href={githubHref}
@@ -57,6 +66,7 @@ function UserInfo(props) {
           type="button"
           text="Try another"
           fill
+          onClick={unsubscribeUser}
         />
       </div>
     </div>
@@ -68,15 +78,20 @@ NumberInfo.propTypes = {
   subinfo: PropTypes.string.isRequired,
 };
 
+UserInfo.defaultProps = {
+  bio: '',
+};
+
 UserInfo.propTypes = {
   name: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
-  bio: PropTypes.string.isRequired,
   followers: PropTypes.number.isRequired,
   repositories: PropTypes.number.isRequired,
   following: PropTypes.number.isRequired,
+  organizations: PropTypes.array.isRequired,
   githubHref: PropTypes.string.isRequired,
+  unsubscribeUser: PropTypes.func.isRequired,
 };
 
 export default UserInfo;

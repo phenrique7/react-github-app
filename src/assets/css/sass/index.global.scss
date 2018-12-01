@@ -1,4 +1,5 @@
-@import "reset";
+@import 'reset';
+@import 'variables.module.scss';
 @import url('https://fonts.googleapis.com/css?family=Lato');
 
 * {
@@ -7,6 +8,7 @@
 
 html, body, #root {
   height: 100%;
+  background: $white-color;
 }
 
 body {

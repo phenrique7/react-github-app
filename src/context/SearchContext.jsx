@@ -55,7 +55,9 @@ class SearchProvider extends React.Component {
 
           removeItemStorage(this.userFetched);
         } else {
-          this.subscribeUser(data);
+          setTimeout(() => {
+            this.subscribeUser(data);
+          }, 1500);
         }
       });
     }

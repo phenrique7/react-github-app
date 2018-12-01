@@ -4,6 +4,7 @@
   position: relative;
   width: 100%;
   min-height: 516px;
+  flex: 0 0 33.333%;
   @include card;
 }
 
@@ -16,8 +17,7 @@
 }
 
 .cardBody {
-  padding: 15px 15px 10px;
-  min-height: 230px;
+  padding: 15px 25px 10px 25px;
   text-align: center;
   h3 {
     margin-top: 65px;
@@ -36,19 +36,16 @@
     max-width: 75%;
     margin-left: auto;
     margin-right: auto;
+    color: $gray-color-secondary;
   }
   &:after {
-    content: '';
-    display: block;
-    width: 200px;
-    height: 1px;
-    background: rgba(0, 0, 0, .1);
+    @include divider;
     margin: 30px auto 0 auto;
   }
 }
 
 .cardFooter {
-  padding: 10px 15px 15px 15px;
+  padding: 15px;
   h3 {
     font-size: 2em;
     line-height: 30px;
@@ -72,12 +69,13 @@
   text-align: center;
   padding: 10px;
   &:before {
-    content: '';
-    display: block;
-    width: 200px;
-    height: 1px;
-    background: rgba(0, 0, 0, .1);
-    margin: 20px auto;
+    @include divider;
+  }
+}
+
+.orgsDivider {
+  &:after {
+    @include divider;
   }
 }
 

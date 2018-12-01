@@ -1,20 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../assets/css/sass/user-profile/github-profile.module.scss';
+import UserInfo from './UserInfo';
 
 function GitHubProfile({ userData, unsubscribeUser }) {
+  const {
+    name,
+    username,
+    avatar,
+    bio,
+    followers,
+    following,
+    orgs,
+    repos,
+  } = userData;
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.profileContainer}>
-        <p>
-          {`${userData.name}'s profile page`}
-        </p>
-        <button
-          type="button"
-          onClick={() => { unsubscribeUser(); }}
-        >
-          Try another
-        </button>
+        <UserInfo
+          name={name}
+          username={username}
+          avatar={avatar}
+          bio={bio}
+          followers={followers}
+          following={following}
+          repositories={repos.length}
+          organizations={orgs}
+          githubHref={`https://github.com/${username}`}
+          unsubscribeUser={unsubscribeUser}
+        />
       </div>
     </div>
   );
@@ -25,7 +40,7 @@ GitHubProfile.propTypes = {
     name: PropTypes.string,
     username: PropTypes.string,
     avatar: PropTypes.string,
-    bio: PropTypes.string,
+    bio: PropTypes.any,
     followers: PropTypes.number,
     following: PropTypes.number,
     orgs: PropTypes.array,
