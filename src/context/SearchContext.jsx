@@ -10,7 +10,7 @@ import {
 } from '../utils';
 import styles from '../assets/css/sass/app.module.scss';
 
-const SearchContext = React.createContext({ hasUserStored: '' });
+const SearchContext = React.createContext();
 
 class SearchProvider extends React.Component {
   constructor(props) {
@@ -109,4 +109,4 @@ SearchProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export { SearchProvider, SearchConsumer };
+export { SearchProvider, SearchConsumer, SearchContext };
