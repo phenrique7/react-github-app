@@ -1,3 +1,4 @@
+@import 'mixins.module';
 
 .searchContainer {
   height: 100%;
@@ -5,5 +6,10 @@
 }
 
 .provider {
+  height: 100%;
+}
+
+.spinner {
+  @include strictly-center;
   height: 100%;
 }

@@ -1,41 +1,103 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Spinner } from '@blueprintjs/core';
+import GitHubUser from '../services/github-user';
+import {
+  getItemStorage,
+  isEmptyObject,
+  removeItemStorage,
+  setItemStorage,
+} from '../utils';
+import styles from '../assets/css/sass/app.module.scss';
 
-const SearchContext = React.createContext({ username: '' });
+const SearchContext = React.createContext({ hasUserStored: '' });
 
 class SearchProvider extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      username: window.localStorage.getItem('github-username'),
-    };
+    this.userData = {};
+    this.userFetched = getItemStorage('github-username');
+
+    if (
+      typeof this.userFetched === 'string'
+      && this.userFetched.length > 0
+      && isEmptyObject(this.userData)
+    ) {
+      this.state = {
+        userFetched: this.userFetched,
+        loading: true,
+      };
+    } else {
+      this.state = {
+        userFetched: this.userFetched,
+        loading: false,
+      };
+    }
 
     this.subscribeUser = this.subscribeUser.bind(this);
     this.unsubscribeUser = this.unsubscribeUser.bind(this);
   }
 
-  subscribeUser(username) {
-    this.setState({ username });
+  componentDidMount() {
+    const { loading } = this.state;
+
+    if (loading) {
+      const user = new GitHubUser(this.userFetched);
+
+      user.getUserData((data, error) => {
+        if (isEmptyObject(data)) {
+          if (error.message === 'Network Error') {
+            console.error('Network Error');
+          } else {
+            console.error('Username not found');
+          }
+
+          removeItemStorage(this.userFetched);
+        } else {
+          setTimeout(() => {
+            this.subscribeUser(data);
+          }, 1500);
+        }
+      });
+    }
+  }
+
+  subscribeUser(userData) {
+    setItemStorage('github-username', userData.username);
+    this.userData = { ...userData };
+
+    this.setState({
+      userFetched: userData.username,
+      loading: false,
+    });
   }
 
   unsubscribeUser() {
-    this.setState({ username: '' });
+    removeItemStorage('github-username');
+    this.userData = {};
+
+    this.setState({ userFetched: null });
   }
 
   render() {
     const { children } = this.props;
-    const { username } = this.state;
+    const { userFetched, loading } = this.state;
 
     return (
       <SearchContext.Provider
         value={{
-          username,
+          userFetched,
+          userData: this.userData,
           subscribeUser: this.subscribeUser,
           unsubscribeUser: this.unsubscribeUser,
         }}
       >
-        {children}
+        {loading ? (
+          <div className={styles.spinner}>
+            <Spinner />
+          </div>
+        ) : children}
       </SearchContext.Provider>
     );
   }

@@ -1,0 +1,84 @@
+@import '../mixins.module';
+
+.card {
+  position: relative;
+  width: 100%;
+  min-height: 516px;
+  flex: 0 0 33.333%;
+  @include card;
+}
+
+.cardHeader {
+  height: 130px;
+  max-width: 100%;
+  @include borderTopRadius;
+  background: url('../../../images/profile-canopy.jpeg') center;
+  background-size: cover;
+}
+
+.cardBody {
+  padding: 15px 25px 10px 25px;
+  text-align: center;
+  h3 {
+    margin-top: 65px;
+    font-size: 2em;
+    line-height: 30px;
+  }
+  h4 {
+    font-size: 1.5em;
+    line-height: 25px;
+    margin-bottom: 1rem;
+    color: $gray-color;
+  }
+  p {
+    font-size: 1em;
+    margin-bottom: 1rem;
+    max-width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    color: $gray-color-secondary;
+  }
+  &:after {
+    @include divider;
+    margin: 30px auto 0 auto;
+  }
+}
+
+.cardFooter {
+  padding: 15px;
+  h3 {
+    font-size: 2em;
+    line-height: 30px;
+  }
+  small {
+    color: $gray-color;
+  }
+}
+
+.numberInfoContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.numberInfo {
+  flex: 1 1 70px;
+  text-align: center;
+}
+
+.organizations {
+  text-align: center;
+  padding: 10px;
+  &:before {
+    @include divider;
+  }
+}
+
+.orgsDivider {
+  &:after {
+    @include divider;
+  }
+}
+
+a ~ button {
+  margin-top: 10px;
+}

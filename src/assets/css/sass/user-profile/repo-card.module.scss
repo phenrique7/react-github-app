@@ -1,0 +1,39 @@
+@import '../mixins.module';
+
+.repoCard {
+  padding: 10px 20px 15px 20px;
+  width: 359px;
+  min-height: 135px;
+  @include card;
+  h5 {
+    a {
+      font-weight: bold;
+      font-size: 1em;
+      line-height: 30px;
+    }
+  }
+  p {
+    font-size: 1em;
+    line-height: 20px;
+    color: $gray-color;
+    min-height: 52px;
+  }
+}
+
+.repoStats {
+  display: flex;
+  color: $gray-color;
+  span {
+    flex: 0 1 85px;
+  }
+  a {
+    color: $gray-color !important;
+    &:hover {
+      color: $blue-color !important;
+      text-decoration: none;
+    }
+    &:first-of-type {
+      margin-right: 20px;
+    }
+  }
+}

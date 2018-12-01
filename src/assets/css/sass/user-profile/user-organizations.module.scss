@@ -1,0 +1,16 @@
+
+.orgContainer {
+  strong {
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+}
+
+.organizations {
+  display: flex;
+  flex-wrap: wrap;
+  a {
+    margin: 5px;
+  }
+}

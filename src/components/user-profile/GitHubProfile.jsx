@@ -1,27 +1,51 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from '../../assets/css/sass/user-profile/github-profile.module.scss';
+import UserInfo from './UserInfo';
 
-function GitHubProfile({ username, unsubscribeUser }) {
+function GitHubProfile({ userData, unsubscribeUser }) {
+  const {
+    name,
+    username,
+    avatar,
+    bio,
+    followers,
+    following,
+    orgs,
+    repos,
+  } = userData;
+
   return (
-    <div>
-      <p>
-        {`${username}'s profile page`}
-      </p>
-      <button
-        type="button"
-        onClick={() => {
-          window.localStorage.removeItem('github-username');
-          unsubscribeUser();
-        }}
-      >
-        Try another
-      </button>
+    <div className={styles.mainContainer}>
+      <div className={styles.profileContainer}>
+        <UserInfo
+          name={name}
+          username={username}
+          avatar={avatar}
+          bio={bio}
+          followers={followers}
+          following={following}
+          repositories={repos.length}
+          organizations={orgs}
+          githubHref={`https://github.com/${username}`}
+          unsubscribeUser={unsubscribeUser}
+        />
+      </div>
     </div>
   );
 }
 
 GitHubProfile.propTypes = {
-  username: PropTypes.string.isRequired,
+  userData: PropTypes.shape({
+    name: PropTypes.string,
+    username: PropTypes.string,
+    avatar: PropTypes.string,
+    bio: PropTypes.any,
+    followers: PropTypes.number,
+    following: PropTypes.number,
+    orgs: PropTypes.array,
+    repos: PropTypes.array,
+  }).isRequired,
   unsubscribeUser: PropTypes.func.isRequired,
 };
 
