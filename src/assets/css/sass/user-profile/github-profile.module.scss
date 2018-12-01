@@ -1,4 +1,13 @@
+@import '../mixins.module';
 
-.mainPanel {
+.mainContainer {
   background-color: #f4f3ef;
+}
+
+.profileContainer {
+  margin: 0 auto;
+  max-width: 1280px;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
 }

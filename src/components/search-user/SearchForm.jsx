@@ -6,6 +6,7 @@ import Avatar from '../Avatar';
 import SearchButton from './SearchButton';
 import GitHubUser from '../../services/github-user';
 import GithubAvatar from '../../assets/images/github-mark.png';
+import { isEmptyObject } from '../../utils';
 import styles from '../../assets/css/sass/search-user/search-form.module.scss';
 
 class SearchForm extends React.Component {
@@ -56,20 +57,22 @@ class SearchForm extends React.Component {
 
       const user = new GitHubUser(username);
 
-      user
-        .getUserData()
-        .then((res) => {
-          console.log(res);
-          window.localStorage.setItem('github-username', username);
-          subscribeUser(username);
-        })
-        .catch(() => {
-          this.handleShowToast('Username not found');
+      user.getUserData((data, error) => {
+        if (isEmptyObject(data)) {
+          if (error.message === 'Network Error') {
+            this.handleShowToast('Network Error');
+          } else {
+            this.handleShowToast('Username not found');
+          }
+
           this.setState(state => ({
             value: '',
             loading: !state.loading,
           }));
-        });
+        } else {
+          subscribeUser(data);
+        }
+      });
     }
   }
 

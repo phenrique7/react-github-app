@@ -49,3 +49,9 @@
   0 0 0 rgba(16, 22, 26, 0),
   0 0 0 rgba(16, 22, 26, 0);
 }
+
+@mixin strictly-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

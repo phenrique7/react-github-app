@@ -13,9 +13,9 @@ import styles from './assets/css/sass/app.module.scss';
 function SearchUser() {
   return (
     <SearchConsumer>
-      {({ username, subscribeUser }) => (
-        username
-          ? <Redirect to={`/${username}`} />
+      {({ userFetched, subscribeUser }) => (
+        typeof userFetched === 'string' && userFetched.length > 0
+          ? <Redirect to={`/${userFetched}`} />
           : (
             <div className={styles.searchContainer}>
               <SearchForm subscribeUser={subscribeUser} />
@@ -29,16 +29,24 @@ function SearchUser() {
 function UserProfile() {
   return (
     <SearchConsumer>
-      {({ username, unsubscribeUser }) => (
-        !username
-          ? <Redirect to="/" />
-          : (
-            <GitHubProfile
-              username={username}
-              unsubscribeUser={unsubscribeUser}
-            />
-          )
-      )}
+      {(dataProvider) => {
+        const {
+          userFetched,
+          unsubscribeUser,
+          userData,
+        } = dataProvider;
+
+        return (
+          !(typeof userFetched === 'string' && userFetched.length > 0)
+            ? <Redirect to="/" />
+            : (
+              <GitHubProfile
+                userData={userData}
+                unsubscribeUser={unsubscribeUser}
+              />
+            )
+        );
+      }}
     </SearchConsumer>
   );
 }
