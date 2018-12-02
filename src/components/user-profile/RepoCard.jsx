@@ -46,6 +46,7 @@ function RepoCard(props) {
 
 RepoCard.defaultProps = {
   repoDescription: '',
+  repoLanguage: '',
   repoStars: 0,
   repoForks: 0,
 };
@@ -54,7 +55,6 @@ RepoCard.propTypes = {
   repoName: PropTypes.string.isRequired,
   repoUrl: PropTypes.string.isRequired,
   repoDescription: PropTypes.string,
-  repoLanguage: PropTypes.string.isRequired,
   repoStars: PropTypes.number,
   repoForks: PropTypes.number,
 };

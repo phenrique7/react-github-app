@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../assets/css/sass/user-profile/github-profile.module.scss';
 import UserInfo from './UserInfo';
+import RepoList from './RepoList';
 
 function GitHubProfile({ userData, unsubscribeUser }) {
   const {
@@ -30,6 +31,7 @@ function GitHubProfile({ userData, unsubscribeUser }) {
           githubHref={`https://github.com/${username}`}
           unsubscribeUser={unsubscribeUser}
         />
+        <RepoList repos={repos} />
       </div>
     </div>
   );

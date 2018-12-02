@@ -2,6 +2,8 @@
 
 .repoListContainer {
   padding: 10px;
+  width: 808px;
+  flex: 1 1 550px;
   @include card;
 }
 

@@ -4,7 +4,8 @@
   position: relative;
   width: 100%;
   min-height: 516px;
-  flex: 0 0 33.333%;
+  flex: 1 1 250px;
+  align-self: flex-start;
   @include card;
 }
 
