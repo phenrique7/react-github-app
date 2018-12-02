@@ -5,6 +5,7 @@ import { compose, withHandlers, withState } from 'recompose';
 import matchSorter from 'match-sorter';
 import { Classes } from '@blueprintjs/core';
 import RepoCard from './RepoCard';
+import withContext from '../../context/WithContext';
 import styles from '../../assets/css/sass/user-profile/repo-list.module.scss';
 
 function RepoList(props) {
@@ -48,18 +49,18 @@ RepoList.propTypes = {
   handleFilterUpdate: PropTypes.func,
 };
 
-export default compose(
+const enhanced = compose(
   withState(
     'reposState',
     'setRepos',
-    props => props.repos,
+    ({ userData }) => userData.repos,
   ),
   withHandlers({
-    handleFilterUpdate: props => ({ target: { value } }) => {
-      let matchingRepos = [...props.repos];
+    handleFilterUpdate: ({ userData, ...props }) => ({ target: { value } }) => {
+      let matchingRepos = [...userData.repos];
 
       if (value) {
-        matchingRepos = matchSorter(props.repos, value, {
+        matchingRepos = matchSorter(userData.repos, value, {
           keys: [
             'name',
             {
@@ -78,3 +79,5 @@ export default compose(
     },
   }),
 )(RepoList);
+
+export default withContext(enhanced);

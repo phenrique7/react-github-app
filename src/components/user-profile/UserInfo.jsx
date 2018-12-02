@@ -4,6 +4,7 @@ import cn from 'classnames';
 import { Button, AnchorButton } from '@blueprintjs/core';
 import Avatar from '../Avatar';
 import UserOrganizations from './UserOrganizations';
+import withContext from '../../context/WithContext';
 import styles from '../../assets/css/sass/user-profile/user-info.module.scss';
 
 function NumberInfo({ info, subinfo }) {
@@ -15,7 +16,7 @@ function NumberInfo({ info, subinfo }) {
   );
 }
 
-function UserInfo(props) {
+function UserInfo({ userData, unsubscribeUser }) {
   const {
     name,
     username,
@@ -23,11 +24,10 @@ function UserInfo(props) {
     bio,
     followers,
     following,
-    repositories,
-    organizations,
+    orgs,
+    repos,
     githubHref,
-    unsubscribeUser,
-  } = props;
+  } = userData;
 
   return (
     <div className={styles.card}>
@@ -45,16 +45,16 @@ function UserInfo(props) {
       <div className={styles.cardFooter}>
         <div className={styles.numberInfoContainer}>
           <NumberInfo info={followers} subinfo="followers" />
-          <NumberInfo info={repositories} subinfo="repositories" />
+          <NumberInfo info={repos.length} subinfo="repositories" />
           <NumberInfo info={following} subinfo="following" />
         </div>
         <div
-          className={organizations.length === 0
+          className={orgs.length === 0
             ? styles.organizations
             : cn(styles.organizations, styles.orgsDivider)
           }
         >
-          <UserOrganizations orgs={organizations} />
+          <UserOrganizations orgs={orgs} />
         </div>
         <AnchorButton
           href={githubHref}
@@ -78,20 +78,18 @@ NumberInfo.propTypes = {
   subinfo: PropTypes.string.isRequired,
 };
 
-UserInfo.defaultProps = {
-  bio: '',
-};
-
 UserInfo.propTypes = {
-  name: PropTypes.string.isRequired,
-  username: PropTypes.string.isRequired,
-  avatar: PropTypes.string.isRequired,
-  followers: PropTypes.number.isRequired,
-  repositories: PropTypes.number.isRequired,
-  following: PropTypes.number.isRequired,
-  organizations: PropTypes.array.isRequired,
-  githubHref: PropTypes.string.isRequired,
+  userData: PropTypes.shape({
+    name: PropTypes.string,
+    username: PropTypes.string,
+    avatar: PropTypes.string,
+    bio: PropTypes.any,
+    followers: PropTypes.number,
+    following: PropTypes.number,
+    orgs: PropTypes.array,
+    repos: PropTypes.array,
+  }).isRequired,
   unsubscribeUser: PropTypes.func.isRequired,
 };
 
-export default UserInfo;
+export default withContext(UserInfo);
