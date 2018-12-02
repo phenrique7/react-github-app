@@ -167,7 +167,7 @@ storiesOf('Profile info', module)
 
     return (
       <div style={{ padding: '10px' }}>
-        <RepoList repos={repos} />
+        <RepoList userData={{ repos }} />
       </div>
     );
   });

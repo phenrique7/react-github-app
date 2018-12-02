@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import shortid from 'shortid';
 import { compose, withHandlers, withState } from 'recompose';
 import matchSorter from 'match-sorter';
-import { Classes } from '@blueprintjs/core';
+import { Classes, NonIdealState } from '@blueprintjs/core';
 import RepoCard from './RepoCard';
 import withContext from '../../context/WithContext';
 import styles from '../../assets/css/sass/user-profile/repo-list.module.scss';
@@ -24,7 +24,7 @@ function RepoList(props) {
         />
       </div>
       <div className={styles.repoList}>
-        {repos.map(repo => (
+        {repos.length > 0 ? repos.map(repo => (
           <RepoCard
             key={shortid.generate()}
             repoName={repo.name}
@@ -34,7 +34,13 @@ function RepoList(props) {
             repoStars={repo.stars}
             repoForks={repo.forks}
           />
-        ))}
+        )) : (
+          <NonIdealState
+            icon="search"
+            title="No search results"
+            description="Your search didn't match any repositories."
+          />
+        )}
       </div>
     </div>
   );
