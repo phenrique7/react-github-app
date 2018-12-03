@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Spinner } from '@blueprintjs/core';
-import GitHubUser from '../services/github-user';
+import gitHubUser from '../services/github-user';
 import {
   getItemStorage,
   isEmptyObject,
@@ -43,7 +43,7 @@ class SearchProvider extends React.Component {
     const { loading } = this.state;
 
     if (loading) {
-      const user = new GitHubUser(this.userFetched);
+      const user = gitHubUser(this.userFetched);
 
       user.getUserData((data, error) => {
         if (isEmptyObject(data)) {

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import Avatar from '../Avatar';
 import SearchButton from './SearchButton';
 import withContext from '../../context/WithContext';
-import GitHubUser from '../../services/github-user';
+import gitHubUser from '../../services/github-user';
 import GithubAvatar from '../../assets/images/github-mark.png';
 import { hasUserFetched, isEmptyObject } from '../../utils';
 import styles from '../../assets/css/sass/search-user/search-form.module.scss';
@@ -57,7 +57,7 @@ class SearchForm extends React.Component {
     } else {
       this.setState(state => ({ loading: !state.loading }));
 
-      const user = new GitHubUser(username);
+      const user = gitHubUser(username);
 
       user.getUserData((data, error) => {
         if (isEmptyObject(data)) {

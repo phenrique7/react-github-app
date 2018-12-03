@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-class GitHubUser {
-  constructor(username) {
-    this.username = username;
-  }
+const gitHubUser = username => ({
+  username,
 
   getUserData(callback) {
     const userData = {};
@@ -32,15 +30,15 @@ class GitHubUser {
       .catch((err) => {
         callback(userData, err);
       });
-  }
+  },
 
   getOrgs() {
     return axios.get(`https://api.github.com/users/${this.username}/orgs`);
-  }
+  },
 
   getRepos() {
     return axios.get(`https://api.github.com/users/${this.username}/repos`);
-  }
-}
+  },
+});
 
-export default GitHubUser;
+export default gitHubUser;
