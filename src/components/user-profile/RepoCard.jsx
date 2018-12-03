@@ -22,23 +22,25 @@ function RepoCard(props) {
       </h5>
       <p>{repoDescription}</p>
       <div className={styles.repoStats}>
-        <span>
-          {repoLanguage}
-        </span>
+        {repoLanguage && (
+          <span>
+            {repoLanguage}
+          </span>
+        )}
         {repoStars !== 0 && (
           <a href={`${repoUrl}/stargazers`}>
             <Icon icon="star" iconSize={13} />
             &nbsp;&nbsp;
             {repoStars}
-          </a>)
-        }
+          </a>
+        )}
         {repoForks !== 0 && (
           <a href={`${repoUrl}/network`}>
             <Icon icon="fork" iconSize={13} />
             &nbsp;&nbsp;
             {repoForks}
-          </a>)
-        }
+          </a>
+        )}
       </div>
     </div>
   );
@@ -46,6 +48,7 @@ function RepoCard(props) {
 
 RepoCard.defaultProps = {
   repoDescription: '',
+  repoLanguage: '',
   repoStars: 0,
   repoForks: 0,
 };
@@ -54,7 +57,7 @@ RepoCard.propTypes = {
   repoName: PropTypes.string.isRequired,
   repoUrl: PropTypes.string.isRequired,
   repoDescription: PropTypes.string,
-  repoLanguage: PropTypes.string.isRequired,
+  repoLanguage: PropTypes.string,
   repoStars: PropTypes.number,
   repoForks: PropTypes.number,
 };

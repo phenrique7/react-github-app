@@ -23,9 +23,14 @@ function isEmptyObject(object) {
   return typeof object === 'object' && Object.values(object).length === 0;
 }
 
+function hasUserFetched(userFetched) {
+  return typeof userFetched === 'string' && userFetched.length > 0;
+}
+
 export {
   setItemStorage,
   getItemStorage,
   removeItemStorage,
   isEmptyObject,
+  hasUserFetched,
 };

@@ -1,12 +1,14 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { Classes, Intent, Toast } from '@blueprintjs/core';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
 import Avatar from '../Avatar';
 import SearchButton from './SearchButton';
+import withContext from '../../context/WithContext';
 import GitHubUser from '../../services/github-user';
 import GithubAvatar from '../../assets/images/github-mark.png';
-import { isEmptyObject } from '../../utils';
+import { hasUserFetched, isEmptyObject } from '../../utils';
 import styles from '../../assets/css/sass/search-user/search-form.module.scss';
 
 class SearchForm extends React.Component {
@@ -77,6 +79,12 @@ class SearchForm extends React.Component {
   }
 
   render() {
+    const { userFetched } = this.props;
+
+    if (hasUserFetched(userFetched)) {
+      return <Redirect to={`/${userFetched}`} />;
+    }
+
     const {
       value,
       isValidInput,
@@ -85,47 +93,54 @@ class SearchForm extends React.Component {
     } = this.state;
 
     return (
-      <div className={styles.formContainer}>
-        {!isValidInput && (
-          <div className={styles.toastContainer}>
-            <Toast
-              intent={Intent.DANGER}
-              icon="warning-sign"
-              message={this.toastMessage}
-              className={toastFade === 'in' ? styles.fadeIn : styles.fadeOut}
-              timeout={4000}
-              onDismiss={this.handleDismissToast}
+      <div className={styles.searchContainer}>
+        <div className={styles.formContainer}>
+          {!isValidInput && (
+            <div className={styles.toastContainer}>
+              <Toast
+                intent={Intent.DANGER}
+                icon="warning-sign"
+                message={this.toastMessage}
+                className={toastFade === 'in' ? styles.fadeIn : styles.fadeOut}
+                timeout={4000}
+                onDismiss={this.handleDismissToast}
+              />
+            </div>)
+          }
+          <form
+            className={styles.form}
+            onSubmit={this.submitForm.bind(this)}
+          >
+            <Avatar
+              src={GithubAvatar}
+              alt="Github avatar"
             />
-          </div>)
-        }
-        <form
-          className={styles.form}
-          onSubmit={this.submitForm.bind(this)}
-        >
-          <Avatar
-            src={GithubAvatar}
-            alt="Github avatar"
-          />
-          <h2 className={styles.formTitle}>
-            React GitHub App
-          </h2>
-          <input
-            type="text"
-            className={cn(Classes.INPUT, styles.formInput)}
-            dir="auto"
-            placeholder="Enter a github username"
-            onChange={this.handleChange.bind(this)}
-            value={value}
-          />
-          <SearchButton isLoading={loading} />
-        </form>
+            <h2 className={styles.formTitle}>
+              React GitHub App
+            </h2>
+            <input
+              type="text"
+              className={cn(Classes.INPUT, styles.formInput)}
+              dir="auto"
+              placeholder="Enter a github username"
+              onChange={this.handleChange.bind(this)}
+              value={value}
+            />
+            <SearchButton isLoading={loading} />
+          </form>
+        </div>
       </div>
     );
   }
 }
 
+SearchForm.defaultProps = {
+  userFetched: '',
+};
+
 SearchForm.propTypes = {
+  userFetched: PropTypes.string,
   subscribeUser: PropTypes.func.isRequired,
 };
 
-export default SearchForm;
+export default withContext(SearchForm);
