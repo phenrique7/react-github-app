@@ -1,8 +1,7 @@
 @import '../mixins.module';;
 
 .repoListContainer {
-  padding: 10px 10px 30px;
-  width: 808px;
+  padding: 20px 10px;
   flex: 1 1 550px;
   @include card;
 }
@@ -28,9 +27,8 @@
   }
   &:after {
     @include divider;
+    margin: 25px 2px;
     width: 100%;
-    margin-left: 2px;
-    margin-right: 2px;
   }
 }
 

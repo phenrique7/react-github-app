@@ -28,10 +28,10 @@ function RepoList(props) {
           <RepoCard
             key={shortid.generate()}
             repoName={repo.name}
-            repoUrl={repo.url}
+            repoUrl={repo.html_url}
             repoDescription={repo.description}
             repoLanguage={repo.language}
-            repoStars={repo.stars}
+            repoStars={repo.stargazers_count}
             repoForks={repo.forks}
           />
         )) : (

@@ -17,6 +17,7 @@ class GitHubUser {
         userData.bio = data.bio;
         userData.followers = data.followers;
         userData.following = data.following;
+        userData.githubHref = data.html_url;
 
         return this.getOrgs();
       })
@@ -40,7 +41,6 @@ class GitHubUser {
   getRepos() {
     return axios.get(`https://api.github.com/users/${this.username}/repos`);
   }
-
 }
 
 export default GitHubUser;

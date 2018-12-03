@@ -1,6 +1,10 @@
 @import 'reset';
 @import 'variables.module.scss';
-@import url('https://fonts.googleapis.com/css?family=Lato');
+@import url('https://rsms.me/inter/inter-ui.css');
+
+@supports (font-variation-settings: normal) {
+  html { font-family: 'Inter UI var alt', sans-serif; }
+}
 
 * {
   box-sizing: border-box;
@@ -12,7 +16,7 @@ html, body, #root {
 }
 
 body {
-  font-family: 'Lato', 'Open Sans', 'Helvetica Neue', 'Icons16', sans-serif !important;
+  font-family: 'Inter UI', 'Open Sans', 'Helvetica Neue', 'Icons16', sans-serif !important;
 }
 
 img {

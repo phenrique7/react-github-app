@@ -1,11 +1,16 @@
 @import '../mixins.module';
 
 .repoCard {
-  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 10px 20px 15px 20px;
   min-height: 135px;
   flex: 1 1 270px;
-  max-width: 364px;
+  max-width: 357px;
+  @include device(tablet) {
+    max-width: 808px;
+  }
   @include card;
   h5 {
     a {
@@ -15,10 +20,14 @@
     }
   }
   p {
-    font-size: 1em;
+    font-size: 0.9em;
     line-height: 20px;
     color: $gray-color;
     min-height: 52px;
+    flex: 1;
+    @include device(mobile) {
+      font-size: 0.8em;
+    }
   }
 }
 
