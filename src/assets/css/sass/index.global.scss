@@ -1,0 +1,24 @@
+@import 'reset';
+@import 'variables.module.scss';
+@import url('https://rsms.me/inter/inter-ui.css');
+
+@supports (font-variation-settings: normal) {
+  html { font-family: 'Inter UI var alt', sans-serif; }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  background: $white-color;
+}
+
+body {
+  font-family: 'Inter UI', 'Open Sans', 'Helvetica Neue', 'Icons16', sans-serif !important;
+}
+
+img {
+  display: block;
+}

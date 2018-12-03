@@ -1,0 +1,10 @@
+@import 'mixins.module';
+
+.provider {
+  height: 100%;
+}
+
+.spinner {
+  @include strictly-center;
+  height: 100%;
+}
